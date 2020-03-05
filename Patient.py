@@ -10,6 +10,10 @@ class Patient:
     def __str__(self):
         return_str = "|Patient State: " + self.risk + "|"
         return_str += self.age + "|"
-        return_str += self.weight + "|"
+        return_str += "Weight: " + self.weight + "KG|\n"
         return return_str
+
+
+#Patient(Risk.HIGH, 25, 2, 20)
+
 

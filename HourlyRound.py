@@ -8,8 +8,9 @@ class HourlyRound:
 
     def __str__(self):
         return_str = "|Day: " + self.day
-        return_str += "|Time: " + self.time
+        # datetime object must be wrapped in str, removed unused seconds from string
+        return_str += "|Time: " + str(self.time)[:-3]
         return_str += "|Feed: " + self.feed
         return_str += "|GRV: " + self.grv
-        return_str += "|Issues: " + self.issues + "|"
+        return_str += "|Issues: " + self.issues + "|\n"
         return return_str
