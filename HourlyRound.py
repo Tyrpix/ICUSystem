@@ -1,3 +1,7 @@
+# Constructs hourly round object with attributes from the CSV file based on each row per hour
+# Returns the attributes as strings
+
+
 class HourlyRound:
     def __init__(self, day, time, feed, grv, issues):
         self.day = day

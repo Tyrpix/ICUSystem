@@ -1,4 +1,6 @@
 from Risk import Risk
+# Constructs patient object with attributes from the CSV file
+# Returns the attributes as strings
 
 
 class Patient:
@@ -14,6 +16,5 @@ class Patient:
         return return_str
 
 
-#Patient(Risk.HIGH, 25, 2, 20)
 
 

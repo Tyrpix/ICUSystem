@@ -1,3 +1,7 @@
+# Constructs object Diagnosis using patient object and hourly round list of objects
+# Returns the objects as strings
+
+
 class Diagnosis:
     def __init__(self, patient, hourly_rounds):
         self.patient = patient

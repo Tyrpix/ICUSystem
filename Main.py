@@ -39,17 +39,23 @@ def get_diagnosis_result(filename):
 
             hourly_round_list.append(HourlyRound(day_set, time_obj.time(), row[2], row[3], row[4]))
 
+    # Create instance of diagnosis
     diagnosis = Diagnosis(patient, hourly_round_list)
 
     return diagnosis
 
 
+# Create instance of ICU System which has all data
 icu_system = ICUSystem()
+
+# Create instance of Patient and HourlyRound which then returns Diagnosis instance
 diagnosis_A1 = get_diagnosis_result("PATIENT DATA - PATIENT A1.csv")
+
+# Add Diagnosis instance to ICU System list of objects
 icu_system.add_diagnosis(diagnosis_A1)
+
 diagnosis_A2 = get_diagnosis_result("PATIENT DATA - PATIENT A2.csv")
 icu_system.add_diagnosis(diagnosis_A2)
-print(icu_system)
-i=0
+
 
 
