@@ -1,3 +1,5 @@
+from HRDayThree import HRDayThree
+
 class HRDayTwo:
     def __init__(self, patient, current_feed):
         self.hour = 0

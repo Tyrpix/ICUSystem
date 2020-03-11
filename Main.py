@@ -35,9 +35,13 @@ def get_diagnosis_result(filename):
                 day_set = current_day
 
             if row[1] == '': continue
-            time_obj = datetime.datetime.strptime(row[1], '%H:%M')
+            #time_obj = datetime.datetime.strptime(row[1], '%H:%M')
 
-            hourly_round_list.append(HourlyRound(day_set, time_obj.time(), row[2], row[3], row[4]))
+            timelist = row[1].split(':')
+
+            time = timelist[0]
+
+            hourly_round_list.append(HourlyRound(day_set, int(time), row[2], row[3], row[4]))
 
     diagnosis = Diagnosis(patient, hourly_round_list)
 
