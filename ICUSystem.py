@@ -1,6 +1,7 @@
 # Constructs the object ICU System with all patient objects and their respective data which is stored in a list
 from HRDayOne import HRDayOne
 from InitialLR import InitialLR
+import datetime
 
 
 class ICUSystem:
@@ -8,6 +9,7 @@ class ICUSystem:
         # Holds diagnosis for each patient (patient + hourly round data)
         self.diagnosis_list = []
         self.day = 1
+        # Date time object here starting at 00:00
         self.hour = 0
 
     def add_diagnosis(self, diagnosis):
@@ -18,12 +20,6 @@ class ICUSystem:
         for diagnosis in self.diagnosis_list:
             return_str += str(diagnosis) + "\n"
         return return_str
-
-    def increment_hour(self):
-        self.hour = self.hour + 1
-        if self.hour == 24:
-            self.hour = 0
-            self.day = self.day + 1
 
     def perform_rounds(self):
         # Holds the current state of the patient
@@ -42,17 +38,16 @@ class ICUSystem:
         for day in range(1, 5):
             for hour in range(0, 23):
                 for i in range(len(state_list)):
-                    # Store patient at index in state list
+                    # Get patient at index in state list????
                     patient_data = state_list[i].patient
 
                     for diagnosis in self.diagnosis_list:
                         # Check patient in diagnosis is same as stored patient
                         if diagnosis.patient == patient_data:
                             for hourly_round in diagnosis.hourly_rounds:
-                                if hourly_round.hour == hour and hourly_round.day == day:
+                                if hourly_round.time == hour and int(hourly_round.day) == day:
                                     current_state = state_list[i].patient_round_decision(hourly_round)
                                     return current_state
-
 
 
 
