@@ -5,6 +5,7 @@ from InitialLR import InitialLR
 
 class ICUSystem:
     def __init__(self):
+        # Holds diagnosis for each patient (patient + hourly round data)
         self.diagnosis_list = []
         self.day = 1
         self.hour = 0
@@ -16,7 +17,6 @@ class ICUSystem:
         return_str = ""
         for diagnosis in self.diagnosis_list:
             return_str += str(diagnosis) + "\n"
-
         return return_str
 
     def increment_hour(self):
@@ -26,10 +26,10 @@ class ICUSystem:
             self.day = self.day + 1
 
     def perform_rounds(self):
-        # Holds the state of the patient
+        # Holds the current state of the patient
         state_list = []
 
-        # Starting states depending on HR or LR
+        # Iterate through all diagnosis' and assign starting state
         for diagnosis in self.diagnosis_list:
             state = None
             if diagnosis.patient.risk == "HR":
@@ -38,25 +38,20 @@ class ICUSystem:
                 state = InitialLR(diagnosis.patient)
             state_list.append(state)
 
-        # for day in range(1, 5):
-        # for day in range(1, 1):
-        day = 1
-        for hour in range(0, 23):
-            for i in range(len(state_list)):
-                patient_data = state_list[i].patient
-                state_list[i] = function_name(patient_data)
+        # Iterate through each hourly reading
+        for day in range(1, 5):
+            for hour in range(0, 23):
+                for i in range(len(state_list)):
+                    # Store patient at index in state list
+                    patient_data = state_list[i].patient
 
-
-                function here passing in the patient_data
-
-
-                for diagnosis in self.diagnosis_list:
-                    if diagnosis.patient == patient_data:
-                        for hourly_round in diagnosis.hourly_rounds:
-                            # if hourly_round.hour == hour and hourly_round.day == day:
-                            if hour == 0 or hour == 1 and hourly_round.day == day:
-                                current_state = state_list[i].patient_round_decision(hourly_round)
-                                return current_state
+                    for diagnosis in self.diagnosis_list:
+                        # Check patient in diagnosis is same as stored patient
+                        if diagnosis.patient == patient_data:
+                            for hourly_round in diagnosis.hourly_rounds:
+                                if hourly_round.hour == hour and hourly_round.day == day:
+                                    current_state = state_list[i].patient_round_decision(hourly_round)
+                                    return current_state
 
 
 
