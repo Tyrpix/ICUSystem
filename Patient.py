@@ -1,6 +1,4 @@
 from Risk import Risk
-# Constructs patient object with attributes from the CSV file
-# Returns the attributes as strings
 
 
 class Patient:
@@ -12,9 +10,6 @@ class Patient:
     def __str__(self):
         return_str = "|Patient State: " + self.risk + "|"
         return_str += self.age + "|"
-        return_str += "Weight: " + self.weight + "KG|\n"
+        return_str += "Weight: " + self.weight + "KG\n|"
         return return_str
-
-
-
 

@@ -25,24 +25,59 @@ class ICUSystem:
             self.hour = 0
             self.day = self.day + 1
 
-
     def perform_rounds(self):
         # Holds the state of the patient
         state_list = []
 
         # Starting states depending on HR or LR
-        for patient in ICUSystem:
-            if patient.risk == "HR":
-                state = HRDayOne(patient)
+        for diagnosis in self.diagnosis_list:
+            state = None
+            if diagnosis.patient.risk == "HR":
+                state = HRDayOne(diagnosis.patient)
             else:
-                state = InitialLR(patient)
-
+                state = InitialLR(diagnosis.patient)
             state_list.append(state)
 
-        for day in range(1, 5):
-            for hour in range(0, 23):
-                for state in state_list:
-                    patient = state
+        # for day in range(1, 5):
+        # for day in range(1, 1):
+        day = 1
+        for hour in range(0, 23):
+            for i in range(len(state_list)):
+                patient_data = state_list[i].patient
+                state_list[i] = function_name(patient_data)
+
+
+                function here passing in the patient_data
+
+
+                for diagnosis in self.diagnosis_list:
+                    if diagnosis.patient == patient_data:
+                        for hourly_round in diagnosis.hourly_rounds:
+                            # if hourly_round.hour == hour and hourly_round.day == day:
+                            if hour == 0 or hour == 1 and hourly_round.day == day:
+                                current_state = state_list[i].patient_round_decision(hourly_round)
+                                return current_state
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
