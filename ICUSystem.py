@@ -36,7 +36,7 @@ class ICUSystem:
 
         # Iterate through each hourly reading
         for day in range(1, 5):
-            for hour in range(0, 23):
+            for hour in range(0, 24):
                 for i in range(len(state_list)):
                     # Get patient at index in state list????
                     patient_data = state_list[i].patient
@@ -47,7 +47,7 @@ class ICUSystem:
                             for hourly_round in diagnosis.hourly_rounds:
                                 if hourly_round.time == hour and int(hourly_round.day) == day:
                                     current_state = state_list[i].patient_round_decision(hourly_round)
-                                    return current_state
+                                    state_list[i] = current_state
 
 
 

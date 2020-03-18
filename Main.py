@@ -35,13 +35,14 @@ def get_diagnosis_result(filename):
                 day_set = current_day
 
             if row[1] == '': continue
-            #time_obj = datetime.datetime.strptime(row[1], '%H:%M')
 
-            timelist = row[1].split(':')
+            time_list = row[1].split(':')
+            time = time_list[0]
 
-            time = timelist[0]
-
-            hourly_round_list.append(HourlyRound(day_set, int(time), row[2], row[3], row[4]))
+            feed = row[2]
+            extracted_feed = ''.join((ch if ch in '0123456789.' else '') for ch in feed)
+            
+            hourly_round_list.append(HourlyRound(day_set, int(time), extracted_feed, row[3], row[4]))
 
     diagnosis = Diagnosis(patient, hourly_round_list)
 
